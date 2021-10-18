@@ -1,0 +1,40 @@
+Plugin and maktaba installation.
+  :set nocompatible
+  :let g:plugindir = fnamemodify($VROOMFILE, ':p:h:h')
+  :let g:bootstrapfile = g:plugindir . '/bootstrap.vim'
+  :execute 'source' g:bootstrapfile
+  :call maktaba#LateLoad()
+  :call float#hello()
+  ~ Hello
+
+
+
+
+
+  :let filter = float#create()
+  |.border('single')
+  |.size(1, 0.2)
+
+  :let preview = float#create()
+  |.border('single')
+  |.size(11, 0.2)
+
+  :let result = float#create()
+  |.border('single')
+  |.size(8, 0.2)
+  |.stack_bottom(filter)
+  |.stack_right(preview)
+  |.center()
+  |.open()
+
+  :ls!
+:call ensure#window#exists_at(6, 12)
+
+
+
+
+
+
+
+
+

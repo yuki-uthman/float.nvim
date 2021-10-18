@@ -1,0 +1,69 @@
+Plugin and maktaba installation.
+  :set nocompatible
+  :let g:plugindir = fnamemodify($VROOMFILE, ':p:h:h')
+  :let g:bootstrapfile = g:plugindir . '/bootstrap.vim'
+  :execute 'source' g:bootstrapfile
+  :call maktaba#LateLoad()
+  :call float#hello()
+  ~ Hello
+
+
+
+
+
+Previously we have set the floating window to scratch buffer using as_scratch().
+We can also do the same using buf_options().
+
+  :let buf_options = { 
+  |'bufhidden': 'hide',
+  |'buftype':   'nofile',
+  |'swapfile':  v:false }
+
+  :let scratch = float#create()
+  |.with_bo(buf_options)
+  |.open()
+
+  :echom getbufvar(scratch.bufnr, "&bufhidden")
+  ~ hide
+  :echom getbufvar(scratch.bufnr, "&buftype")
+  ~ nofile
+  :echom getbufvar(scratch.bufnr, "&swapfile")
+  ~ 0
+
+In fact we can set any buf options using this functions not only limited to
+those three.
+
+  :let buf_options = { 
+  |'shiftwidth': 4,
+  |'filetype': 'vim'}
+
+  :let scratch = float#create()
+  |.with_bo(buf_options)
+  |.open()
+
+  :echom getbufvar(scratch.bufnr, "&shiftwidth")
+  ~ 4
+  :echom getbufvar(scratch.bufnr, "&filetype")
+  ~ vim
+
+
+
+
+Alternatively you can also set it this way.
+  :let buf_options = { 
+  |'bufhidden': 'hide',
+  |'buftype':   'nofile',
+  |'swapfile':  v:false }
+
+  :let scratch = float#create()
+  :let scratch.bo = buf_options
+  :call scratch.open()
+
+
+  :echom getbufvar(scratch.bufnr, "&bufhidden")
+  ~ hide
+  :echom getbufvar(scratch.bufnr, "&buftype")
+  ~ nofile
+  :echom getbufvar(scratch.bufnr, "&swapfile")
+  ~ 0
+

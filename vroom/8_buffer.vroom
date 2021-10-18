@@ -1,0 +1,116 @@
+Plugin and maktaba installation.
+  :set nocompatible
+  :let g:plugindir = fnamemodify($VROOMFILE, ':p:h:h')
+  :let g:bootstrapfile = g:plugindir . '/bootstrap.vim'
+  :execute 'source' g:bootstrapfile
+  :call maktaba#LateLoad()
+  :call float#hello()
+  ~ Hello
+
+
+nvim_buf_set_lines >>> float.set_lines(start, end, [text])
+
+Open float window and write text with set_lines.
+Note that it pushes down any existing lines down if start and end are the same.
+  :let float = float#create().open()
+  :call float.set_lines(0, 0, ['Written set_lines'])
+  Written set_lines
+  &
+  @end
+
+Close the float window.
+  :call float.close()
+
+
+If you do not want the empty line at the end.
+  :let float = float#create().open()
+  :call float.set_lines(0, 1, ['Written by set_lines'])
+  Written by set_lines
+  @end
+
+Close the float window.
+  :call float.close()
+
+
+
+
+
+Insert >>> float.insert(lnum, [text])
+
+Open float window and write some text.
+  :let float = float#create().open()
+  :call float.set_lines(0, 0, ['line 0', 'line 1', 'line 2', 'line 3'])
+  line 0
+  line 1
+  line 2
+  line 3
+  &
+  @end
+
+Insert some text with float.insert().
+Remember that it is zero indexed so the first line is 0.
+  :call float.insert(1, ['inserted'])
+  line 0
+  inserted
+  line 1
+  line 2
+  line 3
+  &
+  @end
+
+Close the float window.
+  :call float.close()
+
+
+
+
+Write >>> float.write(lnum, [text])
+Replaces the number of lines in the array starting with the lnum.
+
+Open float window and write some text.
+  :let float = float#create().open()
+  :call float.write(0, ['line 0', 'line 1', 'line 2', 'line 3'])
+  line 0
+  line 1
+  line 2
+  line 3
+  @end
+
+  :call float.write(0, ['line 10', 'line 11', 'line 12', 'line 13'])
+  line 10
+  line 11
+  line 12
+  line 13
+  @end
+
+Close the float window.
+  :call float.close()
+
+
+
+
+
+
+Delete >>> float.delete(start, end)
+
+Open float window and write some text.
+  :let float = float#create().open()
+  :call float.set_lines(0, 0, ['line 0', 'line 1', 'line 2', 'line 3', 'line 4', 'line 5'])
+  line 0
+  line 1
+  line 2
+  line 3
+  line 4
+  line 5
+
+Delete some lines with float.delete().
+Remember that it is zero indexed so the first line is 0 and the end line is exclusive!
+So here it does not include the line 3.
+  :call float.delete(1, 3)
+  line 0
+  line 3
+  line 4
+  line 5
+
+Close the float window.
+  :call float.close()
